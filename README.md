@@ -105,5 +105,5 @@ const char *WIFI_PASS = "your_password";
 #define WX_LAT   "your_lat"
 #define WX_LON   "your_long"
 
-// Change this to -4*3600 for EDT or -5*3600 for EST as appropriate.
+Change this to -4*3600 for EDT or -5*3600 for EST as appropriate.
 #define GMT_OFFSET   (-4 * 3600)   // UTC-4  (EDT)
