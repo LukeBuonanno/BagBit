@@ -48,7 +48,7 @@ enum AppState {
   STATE_GAMES_MENU, STATE_PONG, STATE_CLICKER, STATE_WEATHER
 };
 AppState appState = STATE_SCREENSAVER;
-#define TOTAL_ANIMS    9
+#define TOTAL_ANIMS    8
 uint8_t  currentAnim = 0;
 uint32_t animStart   = 0;
 const uint32_t ANIM_DURATION = 25000;
@@ -86,7 +86,7 @@ const uint8_t N_SETTINGS = 3;
 const char *settingNames[] = {"Set Hour","Set Minute","Auto-Cycle"};
 uint8_t settingVals[3]     = {12, 0, 1};
 const char *animNames[] = {
-  "Aquarium","Lava Lamp","Plasma","Starfield","Rain","Bounce","Matrix","Nixie Clock","Weather"
+  "Aquarium","Lava Lamp","Plasma","Starfield","Rain","Matrix","Nixie Clock","Weather"
 };
 struct WeatherData {
   float   tempF,feelsLikeF,windMph;
@@ -827,6 +827,9 @@ void handleButton(){
       else{appState=STATE_MENU;menuIndex=0;menuIdleTime=now;drawMenuFull();drawMenuLabel();}}
     else if(appState==STATE_PONG){pongOnButton(true);}
     else if(appState==STATE_CLICKER){clkOnLongPress();}
+   else if(appState==STATE_WEATHER){
+  appState=STATE_MENU;menuIndex=0;menuIdleTime=now;drawMenuFull();drawMenuLabel();
+}
   }
   if(btnActive&&!pinLow&&(now-btnPressedAt>=DEBOUNCE_MS)){
     btnActive=false;holdReleasedMs=heldMs;
@@ -838,6 +841,9 @@ void handleButton(){
       else if(appState==STATE_GAMES_MENU){gameMenuIndex=(gameMenuIndex+1)%GAMES_COUNT;drawGamesMenuLabel();}
       else if(appState==STATE_PONG){pongOnButton(false);}
       else if(appState==STATE_CLICKER){clkOnShortPress();}
+      else if(appState==STATE_WEATHER){
+  appState=STATE_MENU;menuIndex=0;menuIdleTime=now;drawMenuFull();drawMenuLabel();
+}
     }
     btnLongFired=false;shopNextFired=false;
   }
